@@ -108,7 +108,7 @@ async function run() {
 
 
         let data=req.body
-        console.log(data.month)
+        console.log(data)
 
         let result
 
