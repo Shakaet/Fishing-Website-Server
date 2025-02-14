@@ -14,7 +14,7 @@ app.get('/', (req, res) => {
   res.send('Hello World!')
 })
 
-const { MongoClient, ServerApiVersion } = require('mongodb');
+const { MongoClient, ServerApiVersion, ObjectId } = require('mongodb');
 const uri = "mongodb+srv://fishingProject:o6x8Ucatn66DG0YN@cluster0.bnqcs.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0";
 
 // Create a MongoClient with a MongoClientOptions object to set the Stable API version
@@ -103,6 +103,157 @@ async function run() {
         const cursor = await projectDecember.find().toArray();
         res.send(cursor)
     })
+
+    app.get("/januaryDetails/:id",async(req,res)=>{
+
+
+        let idx=req.params.id
+
+        let query={_id:new ObjectId(idx)}
+
+        const cursor = await projectJanuary.findOne(query);
+        res.send(cursor)
+    })
+
+
+
+    app.delete("/januaryProject/:id",async(req,res)=>{
+
+        let idx=req.params.id
+
+        const query = { _id: new ObjectId(idx)};
+        const result = await projectJanuary.deleteOne(query);
+        res.send(result)
+    })
+    app.delete("/febProject/:id",async(req,res)=>{
+
+        let idx=req.params.id
+
+        const query = { _id: new ObjectId(idx)};
+        const result = await projectFebruary.deleteOne(query);
+        res.send(result)
+    })
+
+    app.delete("/marchProject/:id",async(req,res)=>{
+
+        let idx=req.params.id
+
+        const query = { _id: new ObjectId(idx)};
+        const result = await projectMarch.deleteOne(query);
+        res.send(result)
+    })
+
+    app.delete("/aprilProject/:id",async(req,res)=>{
+
+        let idx=req.params.id
+
+        const query = { _id: new ObjectId(idx)};
+        const result = await projectApril.deleteOne(query);
+        res.send(result)
+    })
+    app.delete("/mayProject/:id",async(req,res)=>{
+
+        let idx=req.params.id
+
+        const query = { _id: new ObjectId(idx)};
+        const result = await projectMay.deleteOne(query);
+        res.send(result)
+    })
+
+    app.delete("/juneProject/:id",async(req,res)=>{
+
+        let idx=req.params.id
+
+        const query = { _id: new ObjectId(idx)};
+        const result = await projectJune.deleteOne(query);
+        res.send(result)
+    })
+    app.delete("/julyProject/:id",async(req,res)=>{
+
+        let idx=req.params.id
+
+        const query = { _id: new ObjectId(idx)};
+        const result = await projectJuly.deleteOne(query);
+        res.send(result)
+    })
+
+    app.delete("/augustProject/:id",async(req,res)=>{
+
+        let idx=req.params.id
+
+        const query = { _id: new ObjectId(idx)};
+        const result = await projectAugust.deleteOne(query);
+        res.send(result)
+    })
+
+    app.delete("/sepProject/:id",async(req,res)=>{
+
+        let idx=req.params.id
+
+        const query = { _id: new ObjectId(idx)};
+        const result = await projectSeptember.deleteOne(query);
+        res.send(result)
+    })
+
+    app.delete("/octoborProject/:id",async(req,res)=>{
+
+        let idx=req.params.id
+
+        const query = { _id: new ObjectId(idx)};
+        const result = await projectOctobor.deleteOne(query);
+        res.send(result)
+    })
+
+    app.delete("/novProject/:id",async(req,res)=>{
+
+        let idx=req.params.id
+
+        const query = { _id: new ObjectId(idx)};
+        const result = await projectNovember.deleteOne(query);
+        res.send(result)
+    })
+
+    app.delete("/decProject/:id",async(req,res)=>{
+
+        let idx=req.params.id
+
+        const query = { _id: new ObjectId(idx)};
+        const result = await projectDecember.deleteOne(query);
+        res.send(result)
+    })
+
+    app.put("/januaryProject/:id", async (req, res) => {
+        const updatedData = req.body;
+        const idx = req.params.id;
+      
+        // Ensure you're updating the necessary fields directly
+        const filter = { _id: new ObjectId(idx) };
+      
+        const updateDoc = {
+          $set: {
+            projectNo: updatedData.projectNo,
+            waterTreatment: updatedData.waterTreatment,
+            feedAdditives: updatedData.feedAdditives,
+            nh3: updatedData.nh3,
+            ph3: updatedData.ph3,
+            mfu: updatedData.mfu,
+            mfd: updatedData.mfd,
+            efu: updatedData.efu,
+            efd: updatedData.efd,
+            date: updatedData.date,
+            shift: updatedData.shift,
+          },
+        };
+      
+        try {
+          const result = await projectJanuary.updateOne(filter, updateDoc);
+          res.send(result);
+        } catch (error) {
+          console.error("Error updating project:", error);
+          res.status(500).send({ error: "Failed to update the project" });
+        }
+      });
+      
 
     app.post("/addProject",async(req,res)=>{
 
